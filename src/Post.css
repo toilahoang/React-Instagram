@@ -1,0 +1,66 @@
+.post {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    margin-bottom: 50px;
+    max-width: 600px;
+}
+.post__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #e6e4e4;
+}
+.post__headerTitle {
+    display: flex;
+}
+.post__headerTitle span {
+    padding: 5px 10px;
+}
+.post__imageStatus {
+    width: 100%;
+}
+.post__image img {
+    width: 80%;
+}
+.post__image{
+    display: flex;
+    justify-content: center;
+}
+.post__icons {
+    display: flex;
+    justify-content: space-between;
+}
+.post__iconsLeftAll {
+    padding: 5px;
+    cursor: pointer;
+}
+.post__comment--padding {
+    margin: 5px 0;
+}
+.post__status {
+    padding-bottom: 10px;
+}
+.post__status strong,
+.post__comment--padding strong {
+    padding:0 5px;
+}
+.post__form{
+    display: flex;
+border:1px solid lightgray;
+}
+.post__formInput{
+    border: transparent;
+    flex: 1;
+    padding: 10px;
+    outline: none;
+}
+.post__formButton{
+    border: transparent;
+    background-color: transparent;
+    outline: none;
+    color: rgb(141, 141, 235);
+    font-weight: 600;
+    cursor: pointer;
+}

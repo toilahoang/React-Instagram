@@ -1,0 +1,9 @@
+.app__containerHeader{
+    border-bottom:1px solid lightgray;
+}
+.app__content{
+    display: flex;
+    justify-content: center;
+    padding: 10px 30px;
+    flex-wrap: wrap;
+}

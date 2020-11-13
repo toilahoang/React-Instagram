@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15%;
+    flex-wrap: wrap;
+}
+.header__icons {
+    display: flex;
+    padding: 5px;
+}
+.header__icons--padding {
+    margin-top: 15px;
+    padding: 10px 15px;
+}
+.header__avatar {
+    margin-top: -10px;
+}
+@media only screen and (max-width: 1024px) {
+    .header__search {
+        display: none;
+    }
+    .header{
+        padding:10px  20px;
+    }
+    .header__icons--padding {
+        margin-top: 0;
+        padding: 0 5px;
+    }
+}
