@@ -1,12 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Post.css';
+import { db, firebase } from './firebase'
 import { Avatar } from '@material-ui/core'
 import { MoreHoriz, Telegram, FavoriteBorder, Favorite, BookmarkBorder, ChatBubbleOutline } from '@material-ui/icons';
 
 function Post(props) {
-    const { username, caption, avatar, id, imgurl, likes } = props;
+    const { username, caption, avatar, id, imgurl, likes, user } = props;
     const [clickLike, setclickLike] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [TextComment, setTextComment] = useState('');
+    useEffect(
+        () => {
+            db.collection('posts').doc(id).collection('comments').orderBy('timestamp', 'asc').onSnapshot(
+                (snapshot) => {
+                    setComments(snapshot.docs.map(doc => {
+                        return {
+                            id: doc.id,
+                            ...doc.data()
+                        }
+                    }))
+                })
+        }, [id])
 
+    const handleTextComment = (e) => {
+        if (e.target.value) {
+            setTextComment(e.target.value)
+        }
+        else {
+            setTextComment('')
+        }
+    }
+    const handleSubmitComment = (e) => {
+        e.preventDefault();
+        db.collection('posts').doc(id).collection('comments').add({
+            username: user.displayName,
+            text: TextComment,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then((comment) => {
+            console.log('da comment thanh cong', comment)
+        }
+        )
+        setTextComment('')
+    }
     return (
         <div className="post">
             <div className='post__header'>
@@ -32,34 +67,37 @@ function Post(props) {
                                 setclickLike(true)
                             }
                         />)}
-
-
                     <ChatBubbleOutline className='post__iconsLeftAll' />
                     <Telegram className='post__iconsLeftAll' />
                 </div>
                 <BookmarkBorder className='post__iconsLeftAll' />
             </div>
             <div className='post__likes'>
-                {clickLike ? (likes + 1) : likes}
+                {clickLike ? (likes + 1) : likes} likes
             </div>
             <div className='post__status'>
                 <strong>{username}</strong>
                 <span>{caption}</span>
             </div>
             <div className='post__comments'>
-                <div className='post__comment--padding'>
-                    <strong>Hoaminzi</strong>
-                    <span>Dem nay</span>
-                </div>
-                <div className='post__comment--padding'>
-                    <strong>Hoaminzi</strong>
-                    <span>Dem nay</span>
-                </div>
+                {comments && comments.map(
+                    (comment) => (
+                        <div key={comment.id} className='post__comment--padding'>
+                            <strong>{comment.username}</strong>
+                            <span>{comment.text}</span>
+                        </div>
+                    )
+                )}
             </div>
-            <form className='post__form'>
-                <input className='post__formInput' placeholder='Viet vao day...' />
-                <button className='post__formButton' type='submit'>Post</button>
-            </form>
+            {
+                user
+                    ? (<form className='post__form'>
+                        <input onChange={handleTextComment} value={TextComment} type='text' className='post__formInput' placeholder='Viet vao day...' />
+                        <button onClick={handleSubmitComment} disabled={!TextComment} className='post__formButton' type='submit'>Post</button>
+                    </form>)
+                    : (<div></div>)
+            }
+
         </div>
     )
 }

@@ -26,7 +26,7 @@
 .post__image img {
     width: 80%;
 }
-.post__image{
+.post__image {
     display: flex;
     justify-content: center;
 }
@@ -46,23 +46,21 @@
 }
 .post__status strong,
 .post__comment--padding strong {
-    padding:0 5px;
+    padding: 0 5px;
 }
-.post__form{
+.post__form {
     display: flex;
-border:1px solid lightgray;
+    border: 1px solid lightgray;
 }
-.post__formInput{
+.post__formInput {
     border: transparent;
     flex: 1;
     padding: 10px;
     outline: none;
 }
-.post__formButton{
+.post__formButton {
     border: transparent;
-    background-color: transparent;
     outline: none;
-    color: rgb(141, 141, 235);
     font-weight: 600;
     cursor: pointer;
 }

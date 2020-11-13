@@ -27,7 +27,7 @@ function App() {
     console.log(user);
 
     useEffect(() => {
-        db.collection('posts').orderBy('timestamp','desc').onSnapshot((snapshot) => {
+        db.collection('posts').orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
             setPosts(snapshot.docs.map((doc) => {
                 return { id: doc.id, ...doc.data() }
             }))
@@ -46,7 +46,8 @@ function App() {
                     </div>
                     {posts && posts.map(post => {
                         return (
-                            <Post id={post.id}
+                            <Post user={user}
+                                id={post.id}
                                 username={post.username}
                                 caption={post.caption}
                                 imgurl={post.imgurl}
