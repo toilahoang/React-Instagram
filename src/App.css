@@ -7,3 +7,6 @@
     padding: 10px 30px;
     flex-wrap: wrap;
 }
+.app__contentUpload{
+    display: flex;
+}

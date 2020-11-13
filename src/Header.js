@@ -28,20 +28,27 @@ function Header(props) {
         <div className="header">
             <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagrams" className="header__logo" />
             <div className="header__search">
-                {user ? <button onClick={Logout} > dang xuat</button>
-                    : <button onClick={signInGoogle} > dang nhap bang google</button>
-                }
+                <input className='header__searchInput' placeholder='Search...' />
             </div>
             <div className='header__icons'>
-                <div className='header__icons--padding'><Home /></div>
-                <div className='header__icons--padding'><Telegram /></div>
-                <div className='header__icons--padding'><Explore /></div>
-                <div className='header__icons--padding'><Favorite /></div>
-                <div className='header__icons--padding'>
-                    <Avatar alt="Remy Sharp" src={user && user.photoURL} className='header__avatar' />
+                <Home className='header__icons--padding'  />
+                <Telegram className='header__icons--padding' />
+                <Explore className='header__icons--padding' />
+                <Favorite className='header__icons--padding' />
+                <div className='header__button--padding'>
+
+                    {user ?
+                        <div className='btn__logout--flex'>
+                            <Avatar alt="Remy Sharp" src={user && user.photoURL} className='header__avatar' />
+                            <button onClick={Logout} className='btn__logout'>Đăng Xuất</button>
+                        </div>
+                        : <button onClick={signInGoogle} className='btn__login'>Đăng Nhập</button>
+                    }
+
                 </div>
 
             </div>
+
         </div>
     )
 }
